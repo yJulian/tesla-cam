@@ -45,7 +45,14 @@
 
 <script>
 import L from 'leaflet';
+import 'leaflet/dist/images/marker-icon-2x.png';
 import 'leaflet/dist/leaflet.css';
+
+const defaultIcon = L.icon({
+  iconUrl: "./leaflet/marker-icon.png",
+  shadowUrl: "./leaflet/marker-shadow.png",
+});
+L.Marker.prototype.options.icon = defaultIcon;
 
 export default {
   data() {
