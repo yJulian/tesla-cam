@@ -218,22 +218,35 @@ export default {
       }
     },
     selectedFragment(camera) {
-      const fragment = this.selectedFolder.fragments.find(
-        (frag) => frag.camera === camera && frag.timestamp.getTime() === this.selectedFolder.fragments[this.currentFragmentIndex].timestamp.getTime()
-      );
-      return fragment ? fragment.url : '';
+      try {
+        const fragment = this.selectedFolder.fragments.find(
+          (frag) => frag.camera === camera && frag.timestamp.getTime() === this.selectedFolder.fragments[this.currentFragmentIndex].timestamp.getTime()
+        );
+        return fragment ? fragment.url : '';
+      } catch {
+        this.close();
+        return '';
+      }
     },
     playAll() {
-      this.$refs.frontVideo.play();
-      this.$refs.leftRepeaterVideo.play();
-      this.$refs.rightRepeaterVideo.play();
-      this.$refs.backVideo.play();
+      try {
+        this.$refs.frontVideo.play();
+        this.$refs.leftRepeaterVideo.play();
+        this.$refs.rightRepeaterVideo.play();
+        this.$refs.backVideo.play();
+      } catch {
+        this.close();
+      }
     },
     pauseAll() {
-      this.$refs.frontVideo.pause();
-      this.$refs.leftRepeaterVideo.pause();
-      this.$refs.rightRepeaterVideo.pause();
-      this.$refs.backVideo.pause();
+      try {
+        this.$refs.frontVideo.pause();
+        this.$refs.leftRepeaterVideo.pause();
+        this.$refs.rightRepeaterVideo.pause();
+        this.$refs.backVideo.pause();
+      } catch {
+        this.close();
+      }
     },
     ended() {
       this.nextFragment();
